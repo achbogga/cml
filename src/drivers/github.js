@@ -72,7 +72,7 @@ class Github {
     ).repos.createCommitComment({
       ...ownerRepo({ uri: this.repo }),
       body,
-      commitSha
+      commit_sha: commitSha
     });
 
     return commitUrl;
@@ -92,7 +92,7 @@ class Github {
     const name = title;
     return await octokit(this.token, this.repo).checks.create({
       ...ownerRepo({ uri: this.repo }),
-      headSha,
+      head_sha: headSha,
       started_at,
       completed_at,
       conclusion,
@@ -244,7 +244,7 @@ class Github {
     const { pulls } = octokit(this.token, this.repo);
 
     const {
-      data: { htmlUrl }
+      data: { html_url: htmlUrl }
     } = await pulls.create({
       owner,
       repo,
@@ -270,7 +270,7 @@ class Github {
 
     return prs.map((pr) => {
       const {
-        htmlUrl: url,
+        html_url: url,
         head: { ref: source },
         base: { ref: target }
       } = pr;
